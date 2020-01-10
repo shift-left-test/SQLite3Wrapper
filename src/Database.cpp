@@ -24,7 +24,7 @@
 
 #include <sqlite3.h>
 #include <stdexcept>
-#include "sqlite3/Database.hpp"
+#include "SQLite3/Database.hpp"
 
 namespace SQLite3 {
 

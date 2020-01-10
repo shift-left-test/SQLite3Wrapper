@@ -22,37 +22,45 @@
   SOFTWARE.
 */
 
-#ifndef INCLUDE_SQLITE3_DATABASE_HPP_
-#define INCLUDE_SQLITE3_DATABASE_HPP_
+#ifndef INCLUDE_SQLITE3_STATEMENT_HPP_
+#define INCLUDE_SQLITE3_STATEMENT_HPP_
 
 #include <sqlite3.h>
 #include <memory>
-#include <string>
-#include "sqlite3/Statement.hpp"
+#include "SQLite3/Column.hpp"
 
 namespace SQLite3 {
 
-class Database {
+class Statement {
  public:
-  enum OPEN {
-    READWRITE = SQLITE_OPEN_READWRITE,
-    READONLY = SQLITE_OPEN_READONLY,
-    CREATE = SQLITE_OPEN_CREATE,
-  };
+  explicit Statement(sqlite3_stmt* stmt);
+  int execute();
+  bool fetch();
+  void reset();
 
-  explicit Database(const std::string& path);
-  Database(const std::string& path, int flags);
+  Statement& bind(int index, int value);
+  Statement& bind(int index, double value);
+  Statement& bind(int index, const std::string& value);
+  Statement& bind(int index);
+  Statement& bind(const std::string& name, int value);
+  Statement& bind(const std::string& name, double value);
+  Statement& bind(const std::string& name, const std::string& value);
+  Statement& bind(const std::string& name);
+  Column getColumn(int index);
+  Column getColumn(const std::string& name);
 
-  int execute(const std::string& sql);
-  Statement prepare(const std::string& sql);
+  Column operator[](int index);
+  Column operator[](const std::string& name);
 
  private:
   sqlite3* getDB();
+  sqlite3_stmt* getStmt();
   void check(int status);
+  int toIndex(const std::string& name);
 
-  std::unique_ptr<sqlite3, int(*)(sqlite3*)> mDB;
+  std::unique_ptr<sqlite3_stmt, int(*)(sqlite3_stmt*)> mStmt;
 };
 
 }  // namespace SQLite3
 
-#endif  // INCLUDE_SQLITE3_DATABASE_HPP_
+#endif  // INCLUDE_SQLITE3_STATEMENT_HPP_

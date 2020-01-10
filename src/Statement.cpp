@@ -22,7 +22,7 @@
   SOFTWARE.
 */
 
-#include "sqlite3/Statement.hpp"
+#include "SQLite3/Statement.hpp"
 
 namespace SQLite3 {
 

@@ -26,7 +26,7 @@
 #include <memory>
 #include <stdexcept>
 #include "Constants.hpp"
-#include "sqlite3/Database.hpp"
+#include "SQLite3/Database.hpp"
 
 class StatementTest : public ::testing::Test {
  protected:
