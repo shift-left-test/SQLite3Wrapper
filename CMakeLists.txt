@@ -29,7 +29,7 @@ include(CMakeUtils)
 
 set_cxx_standard(11)
 
-enable_static_analysis()
+enable_static_analysis(NO_IWYU)
 enable_testing()
 enable_test_coverage()
 
