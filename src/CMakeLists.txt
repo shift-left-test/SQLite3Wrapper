@@ -22,8 +22,9 @@
 
 find_package(SQLite3 REQUIRED)
 
-build_static_library(
+build_shared_library(
   NAME SQLite3
+  VERSION 0.1.0
   SRCS Database.cpp Statement.cpp Column.cpp
   PUBLIC_HEADERS ${CMAKE_SOURCE_DIR}/include ${SQLITE3_INCLUDE_DIRS}
   LIBS ${SQLite3_LIBRARIES}
