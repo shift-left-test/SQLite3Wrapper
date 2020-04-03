@@ -27,5 +27,6 @@ build_shared_library(
   VERSION 0.1.0
   SRCS Database.cpp Statement.cpp Column.cpp
   PUBLIC_HEADERS ${CMAKE_SOURCE_DIR}/include ${SQLITE3_INCLUDE_DIRS}
+  INSTALL_HEADERS ${CMAKE_SOURCE_DIR}/include/SQLite3Wrapper
   LIBS ${SQLite3_LIBRARIES}
 )
