@@ -24,6 +24,7 @@ cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
 
 project(SQLite3 VERSION 0.1.0)
 
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_LIST_DIR}/scripts")
 include(CMakeUtils)
 
 set_cxx_standard(11)
