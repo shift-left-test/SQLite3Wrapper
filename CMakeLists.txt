@@ -24,17 +24,20 @@ cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
 
 project(SQLite3 VERSION 0.1.0)
 
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/scripts)
 include(CMakeUtils)
 
 set_cxx_standard(11)
+set_default_build_type(Release)
 
 enable_static_analysis(NO_IWYU)
-enable_testing()
-enable_test_coverage()
-
 enable_doxygen()
 
-add_all_subdirectories()
+if(WITH_TESTS)
+    enable_testing()
+    enable_test_coverage()
+    add_subdirectory(test)
+endif()
 
-build_debian_package(MAINTAINER "Sung Gon Kim")
+add_subdirectory(src)
+
+add_all_subdirectories()
