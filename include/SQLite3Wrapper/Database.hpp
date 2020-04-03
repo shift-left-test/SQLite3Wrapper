@@ -22,30 +22,37 @@
   SOFTWARE.
 */
 
-#ifndef INCLUDE_SQLITE3_COLUMN_HPP_
-#define INCLUDE_SQLITE3_COLUMN_HPP_
+#ifndef INCLUDE_SQLITE3WRAPPER_DATABASE_HPP_
+#define INCLUDE_SQLITE3WRAPPER_DATABASE_HPP_
 
 #include <sqlite3.h>
+#include <memory>
 #include <string>
+#include "SQLite3Wrapper/Statement.hpp"
 
-namespace SQLite3 {
+namespace SQLite3Wrapper {
 
-class Column {
+class Database {
  public:
-  Column(sqlite3_stmt* stmt, int index);
+  enum OPEN {
+    READWRITE = SQLITE_OPEN_READWRITE,
+    READONLY = SQLITE_OPEN_READONLY,
+    CREATE = SQLITE_OPEN_CREATE,
+  };
 
-  const char* getName() const noexcept;
-  int getInt() const noexcept;
-  double getDouble() const noexcept;
-  const char* getText() const noexcept;
-  const void* getBlob() const noexcept;
-  int size() const noexcept;
+  explicit Database(const std::string& path);
+  Database(const std::string& path, int flags);
+
+  int execute(const std::string& sql);
+  Statement prepare(const std::string& sql);
 
  private:
-  sqlite3_stmt* mStmt;
-  int mIndex;
+  sqlite3* getDB();
+  void check(int status);
+
+  std::unique_ptr<sqlite3, int(*)(sqlite3*)> mDB;
 };
 
-}  // namespace SQLite3
+}  // namespace SQLite3Wrapper
 
-#endif  // INCLUDE_SQLITE3_COLUMN_HPP_
+#endif  // INCLUDE_SQLITE3WRAPPER_DATABASE_HPP_

@@ -268,3 +268,6 @@ CMakeDoxygenDefaults.cmake
 Doxyfile
 
 # End of https://www.gitignore.io/api/c,vim,c++,gcov,cmake,linux,python
+
+oe-logs
+oe-workdir

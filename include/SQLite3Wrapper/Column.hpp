@@ -22,45 +22,30 @@
   SOFTWARE.
 */
 
-#ifndef INCLUDE_SQLITE3_STATEMENT_HPP_
-#define INCLUDE_SQLITE3_STATEMENT_HPP_
+#ifndef INCLUDE_SQLITE3WRAPPER_COLUMN_HPP_
+#define INCLUDE_SQLITE3WRAPPER_COLUMN_HPP_
 
 #include <sqlite3.h>
-#include <memory>
-#include "SQLite3/Column.hpp"
+#include <string>
 
-namespace SQLite3 {
+namespace SQLite3Wrapper {
 
-class Statement {
+class Column {
  public:
-  explicit Statement(sqlite3_stmt* stmt);
-  int execute();
-  bool fetch();
-  void reset();
+  Column(sqlite3_stmt* stmt, int index);
 
-  Statement& bind(int index, int value);
-  Statement& bind(int index, double value);
-  Statement& bind(int index, const std::string& value);
-  Statement& bind(int index);
-  Statement& bind(const std::string& name, int value);
-  Statement& bind(const std::string& name, double value);
-  Statement& bind(const std::string& name, const std::string& value);
-  Statement& bind(const std::string& name);
-  Column getColumn(int index);
-  Column getColumn(const std::string& name);
-
-  Column operator[](int index);
-  Column operator[](const std::string& name);
+  const char* getName() const noexcept;
+  int getInt() const noexcept;
+  double getDouble() const noexcept;
+  const char* getText() const noexcept;
+  const void* getBlob() const noexcept;
+  int size() const noexcept;
 
  private:
-  sqlite3* getDB();
-  sqlite3_stmt* getStmt();
-  void check(int status);
-  int toIndex(const std::string& name);
-
-  std::unique_ptr<sqlite3_stmt, int(*)(sqlite3_stmt*)> mStmt;
+  sqlite3_stmt* mStmt;
+  int mIndex;
 };
 
-}  // namespace SQLite3
+}  // namespace SQLite3Wrapper
 
-#endif  // INCLUDE_SQLITE3_STATEMENT_HPP_
+#endif  // INCLUDE_SQLITE3WRAPPER_COLUMN_HPP_

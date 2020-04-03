@@ -22,9 +22,9 @@
   SOFTWARE.
 */
 
-#include "SQLite3/Column.hpp"
+#include "SQLite3Wrapper/Column.hpp"
 
-namespace SQLite3 {
+namespace SQLite3Wrapper {
 
 Column::Column(sqlite3_stmt* stmt, int index) :
     mStmt(stmt), mIndex(index) {
@@ -54,4 +54,4 @@ int Column::size() const noexcept {
   return sqlite3_column_bytes(mStmt, mIndex);
 }
 
-}  // namespace SQLite3
+}  // namespace SQLite3Wrapper

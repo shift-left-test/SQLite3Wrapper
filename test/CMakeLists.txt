@@ -21,8 +21,8 @@
 # SOFTWARE.
 
 build_test_program(
-  NAME SQLite3Test
+  NAME SQLite3WrapperTest
   SUFFIX .exe
   SRCS DatabaseTest.cpp StatementTest.cpp ColumnTest.cpp
-  LIBS SQLite3
+  LIBS SQLite3Wrapper
 )

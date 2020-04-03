@@ -26,22 +26,22 @@
 #include <memory>
 #include <stdexcept>
 #include "Constants.hpp"
-#include "SQLite3/Database.hpp"
+#include "SQLite3Wrapper/Database.hpp"
 
 class DatabaseTest : public ::testing::Test {
  protected:
   void SetUp() override {
-    db = std::make_shared<SQLite3::Database>(Constants::DB_FILE);
+    db = std::make_shared<SQLite3Wrapper::Database>(Constants::DB_FILE);
   }
-  std::shared_ptr<SQLite3::Database> db;
+  std::shared_ptr<SQLite3Wrapper::Database> db;
 };
 
 TEST_F(DatabaseTest, testInitOKWhenDefaultOptionGiven) {
-  EXPECT_NO_THROW({ SQLite3::Database db(Constants::DB_FILE); });
+  EXPECT_NO_THROW({ SQLite3Wrapper::Database db(Constants::DB_FILE); });
 }
 
 TEST_F(DatabaseTest, testInitFailsWhenFileNotExist) {
-  EXPECT_THROW({ SQLite3::Database db(Constants::DB_FILE, 0); },
+  EXPECT_THROW({ SQLite3Wrapper::Database db(Constants::DB_FILE, 0); },
                std::runtime_error);
 }
 
@@ -59,6 +59,6 @@ TEST_F(DatabaseTest, testExecuteFailsWhenInvalidQueryGiven) {
 }
 
 TEST_F(DatabaseTest, testExecuteFailsWhenReadOnlyDBGiven) {
-  SQLite3::Database db(Constants::DB_FILE, SQLite3::Database::OPEN::READONLY);
+  SQLite3Wrapper::Database db(Constants::DB_FILE, SQLite3Wrapper::Database::OPEN::READONLY);
   EXPECT_THROW(db.execute(Constants::CREATE_TABLE), std::runtime_error);
 }

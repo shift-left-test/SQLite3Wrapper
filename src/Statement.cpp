@@ -22,9 +22,9 @@
   SOFTWARE.
 */
 
-#include "SQLite3/Statement.hpp"
+#include "SQLite3Wrapper/Statement.hpp"
 
-namespace SQLite3 {
+namespace SQLite3Wrapper {
 
 Statement::Statement(sqlite3_stmt* stmt) : mStmt(stmt, sqlite3_finalize) {
 }
@@ -131,4 +131,4 @@ Column Statement::operator[](const std::string& name) {
   return getColumn(name);
 }
 
-}  // namespace SQLite3
+}  // namespace SQLite3Wrapper

@@ -1,6 +1,6 @@
-# SQLite3
+# SQLite3Wrapper
 
-This is SQLite3
+This is SQLite3Wrapper
 
 
 ### Requirements

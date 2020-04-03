@@ -26,16 +26,16 @@
 #include <memory>
 #include <stdexcept>
 #include "Constants.hpp"
-#include "SQLite3/Database.hpp"
+#include "SQLite3Wrapper/Database.hpp"
 
 class ColumnTest : public ::testing::Test {
  protected:
   void SetUp() override {
-    db = std::make_shared<SQLite3::Database>(Constants::DB_FILE);
+    db = std::make_shared<SQLite3Wrapper::Database>(Constants::DB_FILE);
     db->execute(Constants::CREATE_TABLE);
     db->execute(Constants::INSERT_RECORD);
   }
-  std::shared_ptr<SQLite3::Database> db;
+  std::shared_ptr<SQLite3Wrapper::Database> db;
 };
 
 TEST_F(ColumnTest, testGetColumnFailsWhenOOBIndexGiven) {

@@ -24,9 +24,9 @@
 
 #include <sqlite3.h>
 #include <stdexcept>
-#include "SQLite3/Database.hpp"
+#include "SQLite3Wrapper/Database.hpp"
 
-namespace SQLite3 {
+namespace SQLite3Wrapper {
 
 Database::Database(const std::string& path) :
     Database(path, OPEN::READWRITE | OPEN::CREATE) {
@@ -59,4 +59,4 @@ Statement Database::prepare(const std::string& sql) {
   return Statement(stmt);
 }
 
-}  // namespace SQLite3
+}  // namespace SQLite3Wrapper
