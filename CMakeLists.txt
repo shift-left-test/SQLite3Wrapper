@@ -24,23 +24,17 @@ cmake_minimum_required(VERSION 3.5.1 FATAL_ERROR)
 
 project(SQLite3Wrapper VERSION 0.1.0)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/scripts)
-
 include(CMakeUtils)
 
 set_cxx_standard(11)
 set_default_build_type(Release)
 
-enable_static_analysis(NO_IWYU)
-enable_doxygen()
+enable_static_analysis()
+enable_testing()
 
 if(WITH_TESTS)
-    enable_testing()
     enable_test_coverage()
+    add_subdirectory(test)
 endif()
 
 add_subdirectory(src)
-
-if(WITH_TESTS)
-    add_subdirectory(test)
-endif()
