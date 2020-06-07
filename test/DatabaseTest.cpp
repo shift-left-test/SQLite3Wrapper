@@ -59,6 +59,7 @@ TEST_F(DatabaseTest, testExecuteFailsWhenInvalidQueryGiven) {
 }
 
 TEST_F(DatabaseTest, testExecuteFailsWhenReadOnlyDBGiven) {
-  SQLite3Wrapper::Database db(Constants::DB_FILE, SQLite3Wrapper::Database::OPEN::READONLY);
+  SQLite3Wrapper::Database db(Constants::DB_FILE,
+                              SQLite3Wrapper::Database::OPEN::READONLY);
   EXPECT_THROW(db.execute(Constants::CREATE_TABLE), std::runtime_error);
 }
