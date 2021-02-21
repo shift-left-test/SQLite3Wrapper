@@ -22,6 +22,7 @@
   SOFTWARE.
 */
 
+#include <stdexcept>
 #include "SQLite3Wrapper/Statement.hpp"
 
 namespace SQLite3Wrapper {
