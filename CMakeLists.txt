@@ -31,7 +31,7 @@ include(CMakeUtils)
 set_cxx_standard(11)
 set_default_build_type(Release)
 
-enable_static_analysis()
+enable_static_analysis(clang-tidy cppcheck cpplint)
 enable_testing()
 
 if(WITH_TESTS)
