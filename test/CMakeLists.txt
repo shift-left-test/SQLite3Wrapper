@@ -23,6 +23,7 @@
 build_test_program(
   NAME SQLite3WrapperTest
   SUFFIX .exe
+  PUBLIC_HEADERS ${CMAKE_SOURCE_DIR}
   SRCS DatabaseTest.cpp StatementTest.cpp ColumnTest.cpp
   LIBS SQLite3Wrapper
 )

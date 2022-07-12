@@ -25,7 +25,7 @@
 #include <gtest/gtest.h>
 #include <memory>
 #include <stdexcept>
-#include "Constants.hpp"
+#include "test/Constants.hpp"
 #include "SQLite3Wrapper/Database.hpp"
 
 class DatabaseTest : public ::testing::Test {
@@ -37,7 +37,9 @@ class DatabaseTest : public ::testing::Test {
 };
 
 TEST_F(DatabaseTest, testInitOKWhenDefaultOptionGiven) {
-  EXPECT_NO_THROW({ SQLite3Wrapper::Database db(Constants::DB_FILE); });
+  EXPECT_NO_THROW({
+    std::make_shared<SQLite3Wrapper::Database>(Constants::DB_FILE);
+    });
 }
 
 TEST_F(DatabaseTest, testInitFailsWhenFileNotExist) {

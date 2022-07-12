@@ -25,7 +25,7 @@
 #include <gtest/gtest.h>
 #include <memory>
 #include <stdexcept>
-#include "Constants.hpp"
+#include "test/Constants.hpp"
 #include "SQLite3Wrapper/Database.hpp"
 
 class StatementTest : public ::testing::Test {
