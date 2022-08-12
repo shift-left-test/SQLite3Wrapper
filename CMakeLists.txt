@@ -31,12 +31,11 @@ include(CMakeUtils)
 set_cxx_standard(11)
 set_default_build_type(Release)
 
-enable_static_analysis(clang-tidy cppcheck cpplint)
-enable_testing()
+add_subdirectory(src)
 
 if(WITH_TESTS)
-    enable_test_coverage()
-    add_subdirectory(test)
+  enable_static_analysis(clang-tidy cppcheck cpplint)
+  enable_testing()
+  enable_test_coverage()
+  add_subdirectory(test)
 endif()
-
-add_subdirectory(src)
