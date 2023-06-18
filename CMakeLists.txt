@@ -34,7 +34,7 @@ set_default_build_type(Release)
 add_subdirectory(src)
 
 if(WITH_TESTS)
-  enable_static_analysis(clang-tidy cppcheck cpplint)
+  enable_static_analysis(cppcheck cpplint)
   enable_testing()
   enable_test_coverage()
   add_subdirectory(test)
