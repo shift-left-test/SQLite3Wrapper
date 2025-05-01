@@ -20,10 +20,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-build_test_program(
-  NAME SQLite3WrapperTest
-  SUFFIX .exe
-  PUBLIC_HEADERS ${CMAKE_SOURCE_DIR}
-  SRCS DatabaseTest.cpp StatementTest.cpp ColumnTest.cpp
-  LIBS SQLite3Wrapper
-)
+if(WITH_TESTS)
+  include(GoogleTest)
+
+  add_executable(SQLite3WrapperTest DatabaseTest.cpp StatementTest.cpp ColumnTest.cpp)
+
+  set_target_properties(SQLite3WrapperTest PROPERTIES SUFFIX .exe)
+
+  target_include_directories(SQLite3WrapperTest PRIVATE ${CMAKE_SOURCE_DIR})
+
+  target_link_libraries(SQLite3WrapperTest PRIVATE SQLite3Wrapper)
+  target_link_libraries(SQLite3WrapperTest PRIVATE gmock gtest gtest_main)
+
+  gtest_add_tests(SQLite3WrapperTest "" AUTO)
+endif(WITH_TESTS)

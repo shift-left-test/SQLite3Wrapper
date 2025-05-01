@@ -22,11 +22,18 @@
 
 find_package(SQLite3 REQUIRED)
 
-build_shared_library(
-  NAME SQLite3Wrapper
-  VERSION 0.1.0
-  SRCS Database.cpp Statement.cpp Column.cpp
-  PUBLIC_HEADERS ${CMAKE_SOURCE_DIR}/include ${SQLITE3_INCLUDE_DIRS}
-  INSTALL_HEADERS ${CMAKE_SOURCE_DIR}/include/SQLite3Wrapper
-  LIBS ${SQLite3_LIBRARIES}
+add_library(SQLite3Wrapper SHARED Database.cpp Statement.cpp Column.cpp)
+
+set_target_properties(SQLite3Wrapper PROPERTIES
+  VERSION ${PROJECT_VERSION}
+  SOVERSION ${PROJECT_VERSION_MAJOR}
 )
+
+target_include_directories(SQLite3Wrapper PUBLIC
+  ${CMAKE_SOURCE_DIR}/include
+  ${SQLITE3_INCLUDE_DIRS}
+)
+
+target_link_libraries(SQLite3Wrapper PUBLIC ${SQLite3_LIBRARIES})
+
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/SQLite3Wrapper DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
