@@ -22,7 +22,7 @@
 
 cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
-project(SQLite3Wrapper VERSION 2.0.0)
+project(SQLite3Wrapper VERSION 0.1.0)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
@@ -31,8 +31,8 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(WITH_TESTS)
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g -fprofile-arcs -ftest-coverage")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g -fprofile-arcs -ftest-coverage")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
   enable_testing()
 endif(WITH_TESTS)
 
